@@ -1,0 +1,162 @@
+{
+  "author": "Michael Mutote gmbh",
+  "name": "Chatbot",
+  "version": "1.0.0",
+  "yes_or_no": [
+    " Let us start from the beginning, do you want me to show you how to set up the board? ",
+    " How about the pieces now, do you want to learn about how the pieces move? ",
+    " Did you know some pieces have special abilities? I can tell you all about them? ",
+    " Would you like some hints regarding the pieces? ",
+    " would you like to know some random opening and its names? ",
+    " Chess etiquette is a set of unwritten rules that govern the behavior of chess players, would you like to know some?"
+  ],
+  "enquire": [
+    "what would you like to learn next? ",
+    "What can I show you? ",
+    "ask me anything, anything at all, ",
+    "I possess wisdom of the ancients. I want to share. Ask. ",
+    "Ask an you shall be wiser, Ask.",
+    "you have much to learn, my young padawan. Ask",
+    "I cannot tell a lie, test me. ",
+    ""
+  ],
+  "excitement": [
+    "yay",
+    "that is very cool",
+    " I think i taught you that",
+    "Did I show you that?",
+    "Look at big brain over here",
+    "that is impressive",
+    "well done",
+    "you're a natural",
+    "Now I'm getting jealous",
+    "how did you know"
+  ],
+  "incorrect_sad": [
+    " No, that is not it ",
+    " I don't think that is correct ",
+    " No, that is not possible ",
+    " WTF? "
+  ],
+  "encourage": [
+    "Don't worry, you'll get it soon",
+    "It's only a mistake",
+    "you'll be fine don't worry",
+    "We all make mistakes, even me",
+    "Ooooo, so close, but NO!"
+  ],
+  "change_subject": [
+    "Would you like to try something else instead?",
+    "I think we should move on",
+    "anyway",
+    "swiftly moving on",
+    "Will you be needing any more help",
+    "Let's pretend none of that happened"
+  ],
+  "probe": [
+    "Why so quite all of a sudden?",
+    "Did I upset you?",
+    "Do you want to continue?",
+    "Do you want to take a break?",
+    "Gone fishing?",
+    "*chirp *chirp",
+    "I was once a physics professor",
+    "Earth to \"Grand-Master\" can you hear me?",
+    "Where have you gone",
+    "Say something. ANYTHING",
+    "What's up butter-cup",
+    "It's me isn't it, it's all my fault",
+    "Suprpised pikachu face",
+    "I should have been a drummer",
+    "Please take your time",
+    "M U L T I P A S S?"
+  ],
+  "positive_answer": [
+    "Yes of course, ",
+    "I think I can help with that, ",
+    "Let's see, ",
+    "Oh, I know this one, ",
+    "I have the answer somewhere here, ",
+    "Let me see if I can find out",
+    "I got you",
+    "T A D A A A !",
+    "I do have are a very particular set of skills, to get you that answer: ",
+    "mmmmh, ",
+    "ummmm, "
+  ],
+  "no_answer": [
+    "I have no clue",
+    "I don't know",
+    "If I had more time to look i would have the answer",
+    "I never understood that part to be honest",
+    "I wish I knew",
+    "I would like to get back to you on that",
+    "lol",
+    "To be honest, I do not know",
+    "My mom and dad never taught me that",
+    "there might be a an answer I am not aware of"
+  ],
+  "intros": [
+    "hello, I will be helping you learn chess. My name is AGIM. And your is? ",
+    "I hope you have a chessboard because I believe in practical learning",
+    "I can record games for you, but I am strict when it comes to notation. Start with the colour of piece, then the name of the piece as we discussed then the square it is in and lastly where it is going",
+    "to start recording a game, just let me know",
+    "I have a couple of recorded games and I can pass each move back to you, just have to prompt me for the next move"
+  ],
+  "agim": [
+    "yo",
+    "wassup",
+    "how can I help",
+    "I'm here",
+    "talk to me",
+    "all ears, or eyes",
+    "HEEEEY",
+    "Aha",
+    "ask me a question",
+    "Yes my young padawan"
+  ],
+  "repetition": [
+    "Didn't I answer that already?",
+    "I don't like repeating myself, lets move on",
+    "I know we spoke about this",
+    "You maybe want to check your previous texts?",
+    "Is there something you didn't understand from before?",
+    "I can help you with something else"
+  ],
+  "not_understanding": [
+    "I'm afraid I do not understand",
+    "what do you mean by that",
+    "I don't know what you mean",
+    "could you rephrase please",
+    "I'm not sure I understand what you mean.",
+    "Would you please rephrase that? I want to make sure I understand you correctly.",
+    "I'm completely lost",
+    "Come again",
+    "I dont think I got that",
+    "I don't get it",
+    "huh"
+  ],
+  "more": [
+    " shall I continue? ",
+    " do you require more information? ",
+    " shall I keep going? ",
+    " there is more, do you want it ",
+    " want more? ",
+    " shall I proceed? ",
+    " there is more yes?",
+    "continue?",
+    "press on?",
+    "keep going?"
+  ],
+  "etiquette": [
+    " Shaking hands with your opponent before and after each game",
+    " Keeping silent and focused during the game, avoiding talking or making noise that can distract you or your opponent.",
+    " Following the touch-move rule, which means that if you touch a piece, you have to move it, unless you announce 'ADJUST' before adjusting a piece on its square.",
+    " Making clear and precise moves, placing the pieces firmly on the center of the squares and capturing pieces by removing them from the board.",
+    " Pressing the clock with the same hand that you use to move the pieces, and not abusing the clock by hitting it too hard or too often.",
+    " Announcing “check” and “checkmate” only if it is required by the tournament rules, otherwise it is unnecessary and can be seen as rude or distracting.",
+    " Offering and accepting a draw in a polite and respectful manner, only when it is your turn to move, and not repeating the offer too often or in a hopeless position.",
+    " Resigning when you are clearly losing and have no chance of saving the game, by shaking hands with your opponent or stopping the clock and congratulating them.",
+    " Showing good sportsmanship by not gloating over your victory or complaining about your loss, and by analyzing the game with your opponent in a constructive and friendly way."
+  ]
+}

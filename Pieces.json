@@ -1,0 +1,244 @@
+{
+  "author": "Michael Mutote gmbh",
+  "name": "Chatbot",
+  "version": "1.0.0",
+  "White": {
+    "King": {
+      "steps": " can only move 1 step, if unobstructed ",
+      "direction": [
+        " can move in any direction",
+        " cannot move into a threatened position"
+      ],
+      "points": " is worth INFINITY points",
+      "Alias": "",
+      "Recording": "K",
+      "Quantity": 1,
+      "Current_Position": [
+        "e1"
+      ],
+      "Special_Move": " castling, yes, it requires a castle.",
+      "capturing": " can capture any piece in range of motion, except if that position is threatened",
+      "extended": " The king, can never be put in danger, ever"
+    },
+    "Queen": {
+      "steps": " can move any number of steps, if unobstructed ",
+      "direction": [
+        " can move in a straight line in any direction like a Castle",
+        " can move diagonals like a bishop",
+        "cannot jump over any piece",
+        " normally the player's best defensive and offensive piece"
+      ],
+      "points": " is worth 9 points",
+      "Alias": "",
+      "Recording": "Q",
+      "Quantity": 1,
+      "Current_Position": [
+        "d1"
+      ],
+      "Special_Move": "",
+      "capturing": " can capture any piece in its path of motion but has to stop on the position of the captured piece",
+      "extended": " Try not to move the queen to early because it can be cornered and captured"
+    },
+    "Bishop": {
+      "steps": " can move any number of steps, if unobstructed ",
+      "direction": [
+        " can only move along the diagonals.",
+        " has to land in the same colour square it departed.",
+        " Each bishop occupies a different colour square and is limited to that colour diagonal",
+        "The bishops cannot \"jump\" over any pieces in its way"
+      ],
+      "points": " is worth 3 points",
+      "Alias": "",
+      "Recording": "B",
+      "Quantity": 2,
+      "Current_Position": [
+        "c1",
+        "f1"
+      ],
+      "Special_Move": "",
+      "capturing": " can capture any piece in its path of motion but has to stop on the position of the captured piece",
+      "extended": " The bishop is really useful towards the end of the game due to its range, try and keep the bishops as close to the main diagonals as possible, "
+    },
+    "Knight": {
+      "steps": " can move four steps in total, even when obstructed.",
+      "direction": [
+        "in an L-shape. It can move: two squares in any direction vertically followed by one square horizontally",
+        "or two squares in any direction horizontally followed by one square vertically",
+        "The final square should be empty or have a piece to be captured"
+      ],
+      "points": "is worth 3 points",
+      "Alias": "also known as the Horse...  \n don't ask me why it is a horse",
+      "Recording": "N",
+      "Quantity": 2,
+      "Current_Position": [
+        "b1",
+        "g1"
+      ],
+      "Special_Move": "Jumps over pieces",
+      "capturing": " unlike other pieces, this one can only capture at the end of the range of motion",
+      "extended": " The knight is super useful at the start of the game because the board is so congested, it can be used to jump over pieces and get up close and personal with the king and queen"
+    },
+    "Castle": {
+      "steps": " can move any number of steps, if unobstructed ",
+      "direction": [
+        " can move Left or Right along the row or backwards and forwards in the same column",
+        " can move any number of \"squares\" as long as there is nothing in the way.",
+        " The castle cannot \"jump\" over any pieces in its way"
+      ],
+      "points": " is worth 5 points",
+      "Alias": "Rook",
+      "Recording": "R",
+      "Quantity": 2,
+      "Current_Position": [
+        "a1",
+        "h1"
+      ],
+      "Special_Move": "Castling, with a king",
+      "capturing": "Can capture any piece in its path of motion but has to stop on the position of the captured piece",
+      "extended": " Like the bishop, very useful towards end game due to the long range of motion. Their long-range mobility makes them effective in controlling open ranks and files."
+    },
+    "Pawn": {
+      "steps": " can move one step forwards, if unobstructed ",
+      "direction": [
+        " for its first move each pawn is allowed to move two steps forward but normally one step",
+        " Is the only piece that cannot move backwards!"
+      ],
+      "points": " is worth 1 points",
+      "Alias": " foot soldier, \n but does it with pride and honor",
+      "Recording": "",
+      "Quantity": 8,
+      "Current_Position": [
+        "a2",
+        "b2",
+        "c2",
+        "d2",
+        "e2",
+        "f2",
+        "g2",
+        "h2"
+      ],
+      "Special_Move": "Promotion, En-Passant and Double step as first move",
+      "capturing": " can capture any piece that is on the front diagonal but only one step away.",
+      "extended": "Pawns are essential for controlling space, opening up the board, and supporting other pieces. The pawn and bishops make a nice protective duo since they can cover each other and threaten any piece that threatens either of them. like the mob"
+    }
+  },
+  "Black": {
+    "King": {
+      "steps": " can only move 1 step, if unobstructed ",
+      "direction": [
+        " can move in any direction",
+        " cannot move into a threatened position"
+      ],
+      "points": " is worth INFINITY points",
+      "Alias": "",
+      "Recording": "K",
+      "Quantity": 1,
+      "Current_Position": [
+        "e8"
+      ],
+      "Special_Move": " castling, yes, it requires a castle.",
+      "capturing": " can capture any piece in range of motion, except if that position is threatened",
+      "extended": " The king, can never be put in danger, ever"
+    },
+    "Queen": {
+      "steps": " can move any number of steps, if unobstructed ",
+      "direction": [
+        " can move in a straight line in any direction like a Castle",
+        " can move diagonals like a bishop",
+        "cannot jump over any piece",
+        " normally the player's best defensive and offensive piece"
+      ],
+      "points": " is worth 9 points",
+      "Alias": "",
+      "Recording": "Q",
+      "Quantity": 1,
+      "Current_Position": [
+        "d8"
+      ],
+      "Special_Move": "",
+      "capturing": " can capture any piece in its path of motion but has to stop on the position of the captured piece",
+      "extended": " Try not to move the queen to early because it can be cornered and captured"
+    },
+    "Bishop": {
+      "steps": " can move any number of steps, if unobstructed ",
+      "direction": [
+        " can only move along the diagonals.",
+        " has to land in the same colour square it departed.",
+        " Each bishop occupies a different colour square and is limited to that colour diagonal",
+        "The bishops cannot \"jump\" over any pieces in its way"
+      ],
+      "points": " is worth 3 points",
+      "Alias": "",
+      "Recording": "B",
+      "Quantity": 2,
+      "Current_Position": [
+        "c8",
+        "f8"
+      ],
+      "Special_Move": "",
+      "capturing": " can capture any piece in its path of motion but has to stop on the position of the captured piece",
+      "extended": " The bishop is really useful towards the end of the game due to its range, try and keep the bishops as close to the main diagonals as possible, "
+    },
+    "Knight": {
+      "steps": " can move four steps in total, even when obstructed.",
+      "direction": [
+        "in an L-shape. It can move: two squares in any direction vertically followed by one square horizontally",
+        "or two squares in any direction horizontally followed by one square vertically",
+        "The final square should be empty or have a piece to be captured"
+      ],
+      "points": "is worth 3 points",
+      "Alias": "also known as the Horse...  \n don't ask me why it is a horse",
+      "Recording": "N",
+      "Quantity": 2,
+      "Current_Position": [
+        "b8",
+        "g8"
+      ],
+      "Special_Move": "Jumps over pieces",
+      "capturing": " unlike other pieces, this one can only capture at the end of the range of motion",
+      "extended": " The knight is super useful at the start of the game because the board is so congested, it can be used to jump over pieces and get up close and personal with the king and queen"
+    },
+    "Castle": {
+      "steps": " can move any number of steps, if unobstructed ",
+      "direction": [
+        " can move Left or Right along the row or backwards and forwards in the same column",
+        " can move any number of \"squares\" as long as there is nothing in the way.",
+        " The castle cannot \"jump\" over any pieces in its way"
+      ],
+      "points": " is worth 5 points",
+      "Alias": "Rook",
+      "Recording": "R",
+      "Quantity": 2,
+      "Current_Position": [
+        "a8",
+        "h8"
+      ],
+      "Special_Move": "Castling, with a king",
+      "capturing": "Can capture any piece in its path of motion but has to stop on the position of the captured piece",
+      "extended": " Like the bishop, very useful towards end game due to the long range of motion. Their long-range mobility makes them effective in controlling open ranks and files."
+    },
+    "Pawn": {
+      "steps": " can move one step forwards, if unobstructed ",
+      "direction": [
+        " for its first move each pawn is allowed to move two steps forward but normally one step"
+      ],
+      "points": " is worth 1 points",
+      "Alias": " foot soldier, \n but does it with pride and honor",
+      "Recording": "",
+      "Quantity": 8,
+      "Current_Position": [
+        "a7",
+        "b7",
+        "c7",
+        "d7",
+        "e7",
+        "f7",
+        "g7",
+        "h7"
+      ],
+      "Special_Move": "Promotion, En-Passant and Double step as first move",
+      "capturing": " can capture any piece that is on the front diagonal but only one step away.",
+      "extended": "Pawns are essential for controlling space, opening up the board, and supporting other pieces. The pawn and bishops make a nice protective duo since they can cover each other and threaten any piece that threatens either of them. like the mob"
+    }
+  }
+}

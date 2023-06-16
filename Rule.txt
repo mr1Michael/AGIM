@@ -1,0 +1,152 @@
+
+name chatbot,
+version 1.0.0.3,
+
+chess is a two-player abstract strategy board game -
+the goal, object or objective of the game is to checkmate the opponent’s king -
+the King’s safety and positioning are paramount -
+the King can only move one square at a time in any direction, it must be protected at all costs.
+
+There are 32 pieces in total -
+there are 64 squares in total on the board -
+each player controls 16 pieces of six types on a chessboard king, queen, bishop, knight, castle, pawn -
+each type of piece moves in a distinct way -
+a game can end in various ways, checkmate, resignation or a draw.
+
+capturing means taking a piece that is in a threatened position -
+Captures are indicated by an x between the piece being moved and its destination on record-
+a threatened piece is one that is at risk of being captured -
+a piece can be taken if it is at the end of path of an opponent's piece -
+for the bishop, castle and queen, it just has to be in the way, but the capturing piece has to stop as soon it has captured the threatened piece.
+
+castling is moving the king two squares towards a rook on the same rank and then moving the rook to the square that the king passed over -
+there are conditions neither the king nor the rook has previously moved -
+the squares between the king and the rook are vacant, the king does not leave, cross over, or finish on a square attacked by an enemy piece -
+there aren't any pieces between the king and the rook taking part in the castling move -
+the recommendation it is a good idea when it can get your king out of the center of the board into a safer position -
+it helps to bring one of your rooks towards the center of the board where it can be more active -
+indicated by either O-O (kingside) or O-O-O (queenside).
+
+en-passant is capturing a pawn which skipped a threatened position on the first move by skipping two steps -
+en passant can only be carried out by a pawn on another pawn -
+when i told you how a pawn moves, i told you on first move, the paw can move 2 steps? yeah, well you can't skip a threatened position -
+if you try that, the other player may make an "en passant" or "in passing" capture (french word of the day !!!) with the pawn -
+although the pawn has passed the capture square of the opposing side, that player can move his or her piece diagonally, as it does in capture, to the square that the other player had skipped -
+the pawn that made the double move has been considered captured in passing, and is removed from the chessboard.
+
+
+promotion is a rule in chess that allows a pawn to be changed into any other piece when it reaches the opponent’s side of the board -
+this means that when a pawn reaches the eighth rank (for white) or the first rank (for black) -
+the pawn can be promoted to a queen, rook, bishop, or knight -
+the new piece replaces the pawn on the same square and can be used immediately -
+promotion is a powerful tool that can help players gain an advantage in the endgame -
+a pawn cannot be promoted to a pawn -
+a pawn cannot be promoted to king -
+once the pawn reaches the other end, promotion is mandatory, you cannot refuse promotion.
+
+check is a situation in chess where the king is under attack by one or more of the opponent’s pieces -
+when a player’s king is in check, they must make a move to get their king out of check on their next turn -
+a king cannot put another king in check, that would be violating the rule "the king cannot put themselves ina threatened position" -
+one can escape check by moving the king to a safe square, capturing the attacking piece, or blocking the attack with another piece -
+if a player cannot make any legal move to get their king out of check, then it is checkmate and the game is over.
+
+check-mate is when the game end : the king is under threat of capture and cannot escape in one move, or cannot be rescued by an ally -
+rescued by an ally means none of the king's pieces can capture the source of the threat.
+
+you have to remember that the king cannot capture a piece if that would put the king in a threatened position.
+
+the king also cannot face off with another king as this is also a threatened position.
+
+fools-mate is the fastest possible checkmate and may also be called 2 move checkmate because checkmate occurs after two moves from the start of the game by black -
+don't be the fool, cover your pieces!.
+
+scholar’s mate is a well-known checkmating patterns among chess players, it ends the game after only four moves by attacking the weak f-pawn with a bishop and a queen -
+the f7-pawn is considered weak because it is solely defended by the king, and for this reason it is a common target in many opening traps 1 -
+it occurs after 1.e4 e5 2.qh5 nc6 3.bc4 nf6?? 4.qxf7#.
+
+resigning or resignation is when a player voluntarily ends the game by conceding defeat to their opponent -
+this is usually done when a player feels that they are in an untenable position and that there is no chance of winning or drawing the game.
+
+a draw is the rare condition where neither players can win neither player winning.
+
+a dead position is when neither player has enough material on the board to checkmate their opponent -
+this can happen when both players have only their kings left on the board or when one player has only a king and a bishop or a knight while the other player has only a king -
+in these situations, it is impossible for either player to checkmate their opponent and the game ends in a draw.
+
+stalemate is when situation in chess where the player whose turn it is to move is not in check and has no legal move -
+it is normally the last escape for a player in an inferior position to at least get a draw instead of a defeat -
+so if you are leading in pieces and points, plan your checkmate, guide the opponent into a nicely planned checkmate.
+
+recording moves and recording games use algebraic notation where each -
+each square on the board is identified by its file letter (a-h) followed by its rank number (1-8) -
+rank is a row of squares on the chessboard -
+the chessboard is made up of 8 ranks, numbered 1 to 8 -
+For example: e4 means moving a piece to the e4 square while Nf3 means moving a knight to the f3 square -
+rank 1 is the row closest to the white player and rank 8 is the row closest to the black player -
+the pieces are initially set up on ranks 1 and 2 for white and ranks 7 and 8 for black -
+the ranks are an important part of chess notation as they are used to identify the position of pieces on the board.
+
+chess notation is a system used to record chess moves. the most commonly used notation is algebraic notation -
+in algebraic notation, each piece is represented by a letter k for king, q for queen, r for rook, b for bishop, and n for knight; pawns are not represented by a letter -
+ending squares of the piece being moved are identified using the coordinate system described earlier, where the file is represented by a letter and the rank is represented by a number -
+an example, the move “e4” means that a pawn has been moved to the square e4 -
+if a piece is captured, an “x” is placed between the piece being moved and the destination square -
+for example: “nxe4” means that a knight has captured a piece on the square e4. special symbols are used to indicate check (“+”) and checkmate (“#”).
+
+fianchetto is a pattern of development wherein a bishop is developed to the second rank of the adjacent "b" or "g" file the knight pawn having been moved one or two squares forward -
+it is a staple of many hypermodern openings -
+plan is to delay direct occupation of the centre with the plan of undermining and destroying the opponent's occupied centre.
+
+a chessboard is a gameboard used to play chess. it consists of 64 squares, 8 rows by 8 columns, on which the chess pieces are placed -
+it is square in shape and uses two colours of squares, one light and one dark, in a chequered pattern -
+during play, the board is oriented such that each player's near-right corner square is a light square.
+
+the columns of a chessboard are known as files, the rows are known as ranks -
+the lines of adjoining same-coloured squares (each running from one edge of the board to an adjacent edge) are known as diagonals -
+each square of the board is named using algebraic, descriptive, or numeric chess notation; algebraic notation is the standard -
+in algebraic notation, using white's perspective, files are labeled a through h from left to right, and ranks are labeled 1 through 8 from bottom to top -
+each square is identified by the file and rank which it occupies. the a- through d-files comprise the queenside, while the e- through h-files comprise the kingside.
+
+a king, cannot capture a king; it can only protect the piece putting the other king in check.
+white always moves first.
+
+Knights hold unique importance due to their distinct L-shaped movement. Valued at three points each, they are the only chess pieces capable of jumping over other pieces when necessary. Moreover, Knights are incredibly valuable in the early stages of the game, as they can quickly be maneuvered into optimal positions.
+
+The Sicilian Defense: Considered the most common response to the King's Pawn Opening, you initiate the Sicilian Defense by responding to 1. e4 with c5. It's easy to build on this defense with a variety of different variations, such as the Najdorf, Dragon, or Classical Variations, among others -
+Modern Defense is a Great Opening to Play for a Win with Black.
+
+A fork is one of a basic chess tactic that consists of a single piece attacking two or more pieces at the same time -
+The attacking piece is known as the forking piece, while the attacked troops are known as the forked pieces -
+Best forks come from a knight, because a forking knight cannot be captured by the pieces it is threatening, it is also a minor piece, it can be traded off almost with no restrictions -
+The deadliest forks are the ones that are forcing, involving an attack on the enemy king and create an inescapable threat (the king always has to escape).
+
+A discovered check happens when a piece moves out of the way to uncover a check given by another piece -
+The discovered check is a kind of discovered attacks it is usually more powerful than a regular discovered attack because it is a forcing move that requires the other player to react -
+The discovered check can be a crushing tactic because it can catch your opponent off guard, it forces the other player to respond to the check, giving you enough time to do severe damage.
+
+A pin is a tactic you can use to restrict one or more of your opponent's pieces -
+You can do it by attacking the other player's forces in a way that allows you to explore a much greater vulnerability if the attacked piece moves -
+Usually, the pinned piece blocks an attack to a more valuable piece, but it could also protect a key defender of the position or even impede a checkmate.
+
+A gambit is a chess opening in which a player sacrifices material with the aim of achieving a subsequent positional advantage -
+Queen's gambit (d4 d5 c4) White appears to sacrifice the c-pawn but  Black cannot retain the pawn without incurring a disadvantage -
+King's gambit (e4 e5 f4) White offers a pawn to divert the black e-pawn, if accepted, White may play d4 and Bxf4, regaining the gambit pawn with central domination, or direct their forces against the weak square f7 with moves such as Nf3, Bc4, 0-0, and g3 -
+A downside to the King's Gambit is that it weakens White's king's position, exposing it to the latent threat of ...Qh4+ (or ...Be7–h4+), which may force White to give up castling rights.
+
+Some common mistakes made by beginners in chess include moving their pieces without a plan or purpose -
+not developing their pieces properly at the start of the game -
+not paying attention to their opponent’s threats or moves -
+not protecting their king properly or castling too late or not at all -
+not taking advantage of opportunities to capture their opponent’s pieces or gain material advantage among others.
+
+The Elo rating system in chess measures the relative skill levels of players by assigning them numerical ratings based on their performance against other rated players -
+After playing against another rated player, both players’ ratings are updated based on whether they won or lost and how likely that outcome was based on their ratings before the game -
+The highest rating ever achieved by a player is 2882.
+
+Blitz chess is a fast-paced version of chess where each player has less than 10 minutes to make all their moves during the game.
+
+Bullet chess is an even faster-paced version of chess where each player has less than 3 minutes to make all their moves during the game.
+
+Rapid chess is another fast-paced version of chess where each player has between 10 and 60 minutes to make all their moves during the game.
+
+

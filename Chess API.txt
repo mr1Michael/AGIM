@@ -1,0 +1,95 @@
+const axios = require('axios');
+
+// Set the API endpoint and game ID
+const endpoint = 'https://lichess.org/api/board/game/{gameId}/move/{move}';
+const gameId = 'YOUR_GAME_ID';
+const move = 'YOUR_MOVE';
+
+// Set your API token
+const token = 'YOUR_API_TOKEN';
+
+// Send the move to Lichess
+axios.post(endpoint, {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+})
+.then(response => {
+    console.log(response.data);
+})
+.catch(error => {
+    console.error(error);
+});
+
+To get a Lichess API token, you'll need to create a personal access token on the Lichess website. You can do this by going to the **API Access Tokens** page in your Lichess account preferences³. On this page, you can generate a new personal access token and specify the permissions that you want to grant to the token³.
+
+Once you've generated your personal access token, you can use it to authenticate your API requests to Lichess. You'll need to include your API token in the `Authorization` header of your HTTP requests as a bearer token³.
+
+Source: Conversation with Bing, 2023/05/12
+(1) GitHub - haklein/certabo-lichess: lichess.org board API client for the .... https://github.com/haklein/certabo-lichess.
+(2) Lichess.org API reference. https://lichess.org/api.
+(3) API Tips • lichess.org. https://lichess.org/page/api-tips.
+(4) How To Use API Access Tokens • page 1/1 - lichess.org. https://lichess.org/forum/lichess-feedback/how-to-use-api-access-tokens.
+
+To start a new game on Lichess using their API, you can use the `challenge` API endpoint to create a challenge². When you create a challenge, Lichess will return a response that includes the game ID for the new game³. You can then use this game ID to interact with the game using other API endpoints³.
+
+Here's an example of how you might create a challenge and get the game ID using the `axios` module in Node.js:
+
+```javascript
+const axios = require('axios');
+
+// Set the API endpoint
+const endpoint = 'https://lichess.org/api/challenge/{username}';
+const username = 'YOUR_OPPONENTS_USERNAME';
+
+// Set your API token
+const token = 'YOUR_API_TOKEN';
+
+// Create a challenge
+axios.post(endpoint, {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+})
+.then(response => {
+    // Get the game ID from the response
+    const gameId = response.data.challenge.id;
+    console.log(`Game ID: ${gameId}`);
+})
+.catch(error => {
+    console.error(error);
+});
+```
+
+This code sends a POST request to the Lichess `challenge` API endpoint with the specified username. You'll need to replace `{username}` with the Lichess username of the player that you want to challenge. You'll also need to set your Lichess API token in the `token` variable.
+
+Once you've created the challenge, you can get the game ID from the `id` property of the `challenge` object in the response. You can then use this game ID to interact with the game using other API endpoints.
+
+I hope this helps! 😊
+
+Source: Conversation with Bing, 2023/05/12
+(1) API Tips • lichess.org. https://lichess.org/page/api-tips.
+(2) GitHub - lichess-org/api-demo: Client-side app using various Lichess .... https://github.com/lichess-org/api-demo.
+(3) Lichess.org API reference. https://lichess.org/api.
+
+Yes, you can challenge a bot on Lichess using their API. Lichess has a special type of user account called **Bots** that you can challenge to play chess¹. Bots can play casual and rated games with other players, send and accept challenges, and follow and be followed by other players¹.
+
+To challenge a bot on Lichess using their API, you can use the `challenge` API endpoint just like you would to challenge any other player². You'll need to specify the Lichess username of the bot that you want to challenge when you create the challenge².
+
+Lichess has a list of famous bots that you can challenge for great chess fun on their website¹. Some examples include LeelaChess, LeelaNice, VoteChess, GodelEscherBot, and BadModo¹. You can visit the Lichess website for more information on how to challenge these bots and play chess with them.
+
+I hope this helps! 😊
+
+Source: Conversation with Bing, 2023/05/12
+(1) Welcome Lichess Bots | Blog • lichess.org. https://lichess.org/blog/WvDNticAAMu_mHKP/welcome-lichess-bots.
+(2) Lichess.org API reference. https://lichess.org/api.
+(3) GitHub - Torom/BotLi: Lichess Bot. https://github.com/Torom/BotLi.
+
+websites archive:
+https://www.fide.com/FIDE/handbook/LawsOfChess.pdf
+https://www.scoutresources.org.uk/downloads/ideabase_chessrules.pdf
+https://www.uschess.org/index.php/Learn-About-Chess/Learn-to-Play-Chess.html
+https://chesspulse.com/can-the-king-capture-in-chess/
+https://www.officialgamerules.org/chess
+https://www.chessjournal.com/chess-rules/
+https://www.chessusa.com/chess-rules.html
