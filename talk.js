@@ -41,17 +41,19 @@ io.on('connect', (socket) => {
 
     socket.on('clientMessage', (data) => {
         console.log('received from client: ' + data);
-        if (first_go) {
+        if (!first_go) {
             setTimeout(function () {
                 kws.converstaion_handler(data).then((result) => {
                     socket.emit('serverMessage', result);
                 })
             }, 500);
             first_go = false;
+        } else {
+            kws.converstaion_handler(data).then((result) => {
+                socket.emit('serverMessage', result);
+            });
         }
-        kws.converstaion_handler(data).then((result) => {
-            socket.emit('serverMessage', result);
-        })
+
     });
     socket.on('disconnect', (socket) => {
         console.log('socket disconnected');
