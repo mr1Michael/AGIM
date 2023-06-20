@@ -13,7 +13,8 @@ let board_record = [];
 
 const grammar = ["can", "is", "does", "will", "should", "could", "would", "how", "why", "when", "what", "which", "will",
     "mean"]
-const instruction = ["record", "game", "review", "opening", "recording", "start", "old", "stop", "end", "begin", "agim"]
+const instruction = ["record", "game", "review", "opening", "recording", "start", "old", "stop", "end", "begin",
+    "agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo"]
 const piece = ["king", "queen", "bishop", "knight", "castle", "pawn"];
 const piece_operator = ["move", "capture", "captured", "many", "start", "position", "place", "placed", "worth",
     "value", "direction", "put", "special", "points"];
@@ -115,7 +116,7 @@ function bot_instruction(instr) {
         if (["review", "game"].every(val => instr.includes(val))) {
             return board_record[1];
         }
-        if (["agim"].every(val => instr.includes(val))) {
+        if (["agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo"].every(val => instr.includes(val))) {
             return response.bot_answer("A99");
         }
     }
