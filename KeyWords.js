@@ -116,9 +116,9 @@ function bot_instruction(instr) {
         if (["review", "game"].every(val => instr.includes(val))) {
             return board_record[1];
         }
-        if (["agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo"].every(val => instr.includes(val))) {
-            return response.bot_answer("A99");
-        }
+    }
+    if (["agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo"].some(val => instr.includes(val))) {
+        return response.bot_answer("A99");
     }
     return "";
 }//instructions, mainly for openings and or recording
