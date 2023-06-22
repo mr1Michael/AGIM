@@ -18,7 +18,7 @@ const io = new Server(server)//,{
 // });
 //change the socket port here for front end
 server.listen(port, () => {
-    console.log('listening on *:5001');
+    console.log('listening on *: ', port);
 });
 
 app.use(express.static(path.join(__dirname, 'build')));
