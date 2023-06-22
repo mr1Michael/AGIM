@@ -69,5 +69,6 @@ io.on('disconnect', () => {
 })
 
 function arnold(data) {
+    return "answer string from luis azure"
 }
 
