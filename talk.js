@@ -9,7 +9,7 @@ let timeoutId;
 let first_go = true;
 const path = require('path')
 
-
+const port = process.env.PORT || 5000;
 const io = new Server(server)//,{
 //     cors: { //this stays because It is useful
 //         origin: "http://localhost:3000",
@@ -17,7 +17,7 @@ const io = new Server(server)//,{
 //     }
 // });
 //change the socket port here for front end
-server.listen(5001, () => {
+server.listen(port, () => {
     console.log('listening on *:5001');
 });
 
