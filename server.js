@@ -4,12 +4,11 @@ const http = require('http');
 const server = http.createServer(app);
 const {Server} = require("socket.io");
 const kws = require('./KeyWords.js');
-const fs = require("fs");
-let timeoutId;
+let use_API = false;
 let first_go = true;
 const path = require('path')
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 const io = new Server(server)//,{
 //     cors: { //this stays because It is useful
 //         origin: "http://localhost:3000",
@@ -49,21 +48,26 @@ io.on('connect', (socket) => {
             }, 500);
             first_go = false;
         } else {
-            // ADDING LUIS ENTRY POINT arnold()
-            kws.converstaion_handler(data).then((result) => {
-                socket.emit('serverMessage', result);
-            });
+            if (use_API) {
+                arnold(data).then((result) => {
+                    socket.emit('serverMessage', result);
+                });
+            } else {
+                kws.converstaion_handler(data).then((result) => {
+                    socket.emit('serverMessage', result);
+                });
+            }
         }
 
     });
-    socket.on('disconnect', (socket) => {
+    socket.on('disconnect', () => {
         console.log('socket disconnected');
     })
 });
-io.on('disconnect', (socket) => {
+io.on('disconnect', () => {
     console.log('socket disconnected');
 })
 
-function arnold() {
+function arnold(data) {
 }
 
