@@ -49,6 +49,7 @@ io.on('connect', (socket) => {
             }, 500);
             first_go = false;
         } else {
+            // ADDING LUIS ENTRY POINT
             kws.converstaion_handler(data).then((result) => {
                 socket.emit('serverMessage', result);
             });
