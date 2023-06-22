@@ -49,7 +49,7 @@ io.on('connect', (socket) => {
             }, 500);
             first_go = false;
         } else {
-            // ADDING LUIS ENTRY POINT
+            // ADDING LUIS ENTRY POINT arnold()
             kws.converstaion_handler(data).then((result) => {
                 socket.emit('serverMessage', result);
             });
@@ -63,4 +63,7 @@ io.on('connect', (socket) => {
 io.on('disconnect', (socket) => {
     console.log('socket disconnected');
 })
+
+function arnold() {
+}
 
