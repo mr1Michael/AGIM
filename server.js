@@ -4,7 +4,7 @@ const http = require('http');
 const server = http.createServer(app);
 const {Server} = require("socket.io");
 const kws = require('./KeyWords.js');
-let use_API = true;
+let use_API = false;
 let first_go = true;
 const path = require('path')
 const axios = require('axios');
@@ -68,30 +68,32 @@ io.on('connect', (socket) => {
 io.on('disconnect', () => {
     console.log('socket disconnected');
 });
-const answers = JSON.parse(fs.readFileSync('path/'));
+const answersFile1 =JSON.parse(fs.readFileSync('Rule.txt'));
+const answersFile2 = JSON.parse(fs.readFileSync('Pieces.txt'));
 
+const answers = {... answersFile1, ...answersFile2};
 async function Azure(data) {
     try {
         // making API call to LUIS using axios or another HTTP client library
         const response = await axios.get('https://chess-rule-cb-123.cognitiveservices.azure.com/prediction/v3.0/apps/1fe71a46-17ad-440c-8a78-541a462d3efa/slots/production/predict', {
-            params: {
-                query: data,
-                verbose: true,
+            params : {
+                query : data,
+                verbose : true,
                 'show all intents': true,
                 // Include any additional parameters required by LUIS
             },
             headers: {
-                'Authorization': 'bearer dec1883a01874e5888457eeaf5a7af7d',
+                'Authorization' : 'bearer dec1883a01874e5888457eeaf5a7af7d',
                 // Add any required headers for authentication or other purposes
             },
         });
 
         // Extract the answer string from the API response
         const topIntent = response.data.prediction.topIntent;
-        const answer = answer[data.toLowerCase()];
+        const answer = answers[data.toLowerCase()];
         if (answer) {
             return answer;
-        } else {
+        }else{
             return 'sorry i could not find an answer to your question'
         }
 
