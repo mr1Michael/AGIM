@@ -24,7 +24,7 @@ let bot_raise = false;
 let recording = false
 
 async function conversation_handler(sentence = "") {
-    let words = sentence.toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;]/g, "").split(" ");
+    let words = sentence.toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;~]/g, "").split(" ");
     let kw = find_keywords(words);
     // Bot questions and human answers and bot questions.---------------------------------
     let bot = bot_response(words);
