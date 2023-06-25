@@ -73,7 +73,7 @@ io.on('disconnect', () => {
     console.log('socket disconnected');
 });
 const answersFile1 =JSON.parse(fs.readFileSync('Rule.txt'));
-const answersFile2 = JSON.parse(fs.readFileSync('Pieces.txt'));
+const answersFile2 = JSON.parse(fs.readFileSync('Pieces.json'));
 
 const answers = {... answersFile1, ...answersFile2};
 async function Azure(data) {
