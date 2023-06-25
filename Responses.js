@@ -41,7 +41,7 @@ async function answer(keywords) {
         return ans_buffer[more]
     }
 
-}//called directly from Handler. First checks if keywords match Pieces.json and if not the searches Rule.txt
+} //called directly from Handler. First checks if keywords match Pieces.json and if not the searches Rule.txt
 function bot_answer(question) {
     let ans = []
     ans[0] = "";

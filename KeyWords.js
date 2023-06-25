@@ -22,7 +22,6 @@ const piece_operator = ["move", "capture", "captured", "many", "start", "positio
 let bot_question = 0;
 let bot_raise = false;
 let recording = false
-let last_question = [];
 
 async function conversation_handler(sentence = "") {
     let words = sentence.toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;]/g, "").split(" ");
@@ -50,8 +49,7 @@ async function conversation_handler(sentence = "") {
 } //handles all that chats and assigns them accordingly
 
 function find_keywords(words) {
-    let keywords = {"piece": [], "piece operator": [], "rule_book": [], "instruction": [], "size": 0}
-    let t = [];
+    let keywords = {"piece": [], "piece operator": [], "rule_book": [], "instruction": [], "grammar": [], "size": 0}
     for (let word of words) {
         if (piece.includes(word)) {
             keywords["piece"].push(word);
@@ -68,8 +66,10 @@ function find_keywords(words) {
         if (instruction.includes(word)) {
             keywords["instruction"].push(word);
             keywords["size"]++;
-            // }if ((/[a-h]/i.test(word[0]) )&& (/[1-8]/i.test(word[1]))) {
-            //     // need to decide!!
+        }
+        if (grammar.includes(word)) {
+            keywords["grammar"].push(word);
+            //intentionally not increasing size of the count
         }
     }
     return keywords
