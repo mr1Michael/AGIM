@@ -7,7 +7,8 @@ const kws = require('./KeyWords.js');
 let use_API = false;
 let first_go = true;
 const path = require('path')
-
+const axios = require('axios');
+const fs = require('fs')
 const port = process.env.PORT || 5001;
 const io = new Server(server)//,{
 //     cors: { //this stays because It is useful
@@ -49,7 +50,7 @@ io.on('connect', (socket) => {
             first_go = false;
         } else {
             if (use_API) {
-                arnold(data).then((result) => {
+                Azure(data).then((result) => {
                     socket.emit('serverMessage', result);
                 });
             } else {
@@ -66,8 +67,40 @@ io.on('connect', (socket) => {
 });
 io.on('disconnect', () => {
     console.log('socket disconnected');
-})
+});
+const answers = JSON.parse(fs.readFileSync('path/'));
 
-function arnold(data) {
+async function Azure(data) {
+    try {
+        // making API call to LUIS using axios or another HTTP client library
+        const response = await axios.get('https://chess-rule-cb-123.cognitiveservices.azure.com/prediction/v3.0/apps/1fe71a46-17ad-440c-8a78-541a462d3efa/slots/production/predict', {
+            params: {
+                query: data,
+                verbose: true,
+                'show all intents': true,
+                // Include any additional parameters required by LUIS
+            },
+            headers: {
+                'Authorization': 'bearer dec1883a01874e5888457eeaf5a7af7d',
+                // Add any required headers for authentication or other purposes
+            },
+        });
+
+        // Extract the answer string from the API response
+        const topIntent = response.data.prediction.topIntent;
+        const answer = answer[data.toLowerCase()];
+        if (answer) {
+            return answer;
+        } else {
+            return 'sorry i could not find an answer to your question'
+        }
+
+    } catch (error) {
+        console.error('Error occurred during LUIS API call:', error);
+        // Handle the error or return an error message
+        return 'sorry an error occured while accessing the luis azure API';
+    }
 }
+
+
 
