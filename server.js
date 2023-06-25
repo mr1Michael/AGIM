@@ -55,7 +55,11 @@ io.on('connect', (socket) => {
                 });
             } else {
                 kws.converstaion_handler(data).then((result) => {
-                    socket.emit('serverMessage', result);
+                    if (result === "$") {
+                        use_API = true
+                    } else {
+                        socket.emit('serverMessage', result);
+                    }
                 });
             }
         }

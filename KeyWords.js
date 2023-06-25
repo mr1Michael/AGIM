@@ -130,6 +130,8 @@ function bot_response(words) {
         bot_question = (bot_question + 1) % questions["yes_or_no"].length;
         bot_raise = true;
         return questions["yes_or_no"][bot_question - 1]; //see what happens when this rolls over at length and this value becomes -1
+    } else if (words[0] === "api99") {
+        return "$"
     }
     if (bot_raise) {
         if (["yes", "ja", "yup", "da", "yebo"].some(val => words.includes(val))) {
