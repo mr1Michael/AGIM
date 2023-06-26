@@ -30,14 +30,14 @@ io.on('connect', (socket) => {
     console.log('socket connected');
     setTimeout(function () {
         socket.emit('serverMessage', 'My name is AGIM, I\'m here to help you learn how to play chess');
-    }, 5000);
+    }, 800);
     setTimeout(function () {
         socket.emit('serverMessage', 'I can also record your games (not againt me), just ask me to ' +
             '"start recording" and "stop recording" to stop and "review game" to see your moves');
-    }, 5000);
+    }, 1200);
     setTimeout(function () {
         socket.emit('serverMessage', 'would you like me to start with the basics?');
-    }, 5000);
+    }, 1600);
 
     socket.on('clientMessage', (data) => {
         console.log('received from client: ' + data);
