@@ -1,7 +1,7 @@
 {
   "author": "Michael Mutote gmbh",
   "name": "Chatbot",
-  "version": "1.0.0",
+  "version": "1.0.7.1",
   "look": [
     "0-0",
     "abstract",
@@ -282,10 +282,6 @@
     "taking",
     "target",
     "themselves",
-    "then",
-    "there",
-    "these",
-    "they",
     "threat",
     "threatened",
     "tool",

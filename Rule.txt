@@ -1,6 +1,6 @@
 
 name chatbot,
-version 1.0.0.3,
+version 1.0.9.4,
 
 chess is a two-player abstract strategy board game -
 the goal, object or objective of the game is to checkmate the opponent’s king -
@@ -50,7 +50,7 @@ a king cannot put another king in check, that would be violating the rule "the k
 one can escape check by moving the king to a safe square, capturing the attacking piece, or blocking the attack with another piece -
 if a player cannot make any legal move to get their king out of check, then it is checkmate and the game is over.
 
-check-mate is when the game end : the king is under threat of capture and cannot escape in one move, or cannot be rescued by an ally -
+checkmate is when the game end : the king is under threat of capture and cannot escape in one move, or cannot be rescued by an ally -
 rescued by an ally means none of the king's pieces can capture the source of the threat.
 
 you have to remember that the king cannot capture a piece if that would put the king in a threatened position.
