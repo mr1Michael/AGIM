@@ -1,4 +1,4 @@
-const readline = require('readline');
+//const readline = require('readline');
 const fs = require("fs");
 const board = require('./board.js');
 const response = require("./Responses.js");
@@ -166,7 +166,11 @@ function any_element(arr_len) {
     return Math.floor(Math.random() * arr_len);
 } //Chooses random element in anny array
 
-module.exports = {find_keywords, converstaion_handler: conversation_handler}
+function repeater() {
+    return questions["repetition"][any_element(questions["repetition"].length)]
+}
+
+module.exports = {converstaion_handler: conversation_handler, repeater}
 
 
 // -------------------------------------------------------------testing---------------------------------------

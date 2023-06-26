@@ -9,6 +9,7 @@ let first_go = true;
 const path = require('path')
 const axios = require('axios');
 const fs = require('fs')
+let ans_buffer = []
 const port = process.env.PORT || 5001;
 const io = new Server(server)//,{
 //     cors: { //this stays because It is useful
@@ -40,7 +41,7 @@ io.on('connect', (socket) => {
     }, 1600);
 
     socket.on('clientMessage', (data) => {
-        console.log('received from client: ' + data);
+        //console.log('received from client: ' + data);
         if (!first_go) {
             setTimeout(function () {
                 kws.converstaion_handler(data).then((result) => {
@@ -59,7 +60,12 @@ io.on('connect', (socket) => {
                         use_API = true
                         socket.emit('serverMessage', "switching to LUIS")
                     } else {
-                        socket.emit('serverMessage', result);
+                        if (ans_buffer.includes(result)) {
+                            socket.emit('serverMessage', kws.repeater())
+                        } else {
+                            ans_buffer.push(result)
+                            socket.emit('serverMessage', result);
+                        }
                     }
                 });
             }
