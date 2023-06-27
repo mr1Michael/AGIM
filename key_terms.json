@@ -103,7 +103,7 @@
     "files",
     "finish",
     "first",
-    "fool",
+    "fools",
     "fools-mate",
     "fork",
     "forked",
@@ -269,6 +269,7 @@
     "source",
     "special",
     "stalemate",
+    "stale",
     "standard",
     "staple",
     "start",
@@ -307,6 +308,6 @@
     "white's",
     "win",
     "winning",
-    "yeah"
+    "yes"
   ]
 }

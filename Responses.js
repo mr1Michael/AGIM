@@ -9,12 +9,13 @@ let Question_data = fs.readFileSync('./Questions.json');
 let questions = JSON.parse(Question_data);
 let more = 0;
 let limit = 0;
+let expert_number = 0
 let ans_buffer = []
 
 async function answer(keywords) {
     ans_buffer = [];
     more = 0;
-    console.log(keywords["size"])
+    // console.log(keywords["size"])
     if (keywords["piece"].length === 1) {
         let t = keywords["piece"][0].charAt(0).toUpperCase() + keywords["piece"][0].slice(1); //Change piece name to upper case for navigate json
         if (keywords["piece operator"].includes("move")) {
@@ -31,12 +32,18 @@ async function answer(keywords) {
             return "The " + t + pieces["White"][t]["points"];
         } else if (["capture", "take"].some(val => keywords["piece operator"].includes(val))) {
             return "The " + t + pieces["White"][t]["capturing"];
+        } else if (["many"].some(val => keywords["piece operator"].includes(val))) {
+            return pieces["White"][t]["Quantity"]
         } else if (keywords["size"] === 2) {
             return "Yes, the " + t + " is one of the pieces but, " + questions["not_understanding"][any_element(questions["not_understanding"].length)];
         }
     }
     if (keywords["rule_book"].length >= 1) {
-        ans_buffer = await searchFile([keywords["piece"], keywords["piece operator"], keywords["rule_book"]].flat());
+        let search_ans = await searchFile([keywords["piece"], keywords["piece operator"], keywords["rule_book"]].flat());
+        let ex_ans = expert(keywords["rule_book"].concat(keywords["grammar"]), true)
+        ans_buffer = [];
+        ans_buffer = ((score(keywords["rule_book"].concat(keywords["grammar"]), [search_ans.join()])) >
+            (score(keywords["rule_book"].concat(keywords["grammar"]), [ex_ans]))) ? search_ans : [ex_ans];
         limit = ans_buffer.length;
         return ans_buffer[more]
     }
@@ -49,9 +56,11 @@ function bot_answer(question) {
     if (question === "A1") {
         ans_start = ans_start + ". I'll do the white pieces and lets see if you can do the black pieces."
         for (let i in pieces.White) {
+            k = ""
             for (let j in pieces.White[i].Current_Position) {
-                ans.push(i + " " + pieces.White[i].Current_Position[j]);
+                k = k + " " + i + " " + pieces.White[i].Current_Position[j] + " ";
             }
+            ans.push(k)
         }
     } else if (question === "A2") {
         for (let i in pieces.White) {
@@ -61,7 +70,7 @@ function bot_answer(question) {
             }
         }
     } else if (question === "A3") {
-        ans_start = ans_start + " Ah, you want the special moves, you are going to have to pick the one you like the most. \n";
+        ans_start = ans_start + " Ah, you want the special moves, i got you \n";
         for (let i in pieces.White) {
             if (pieces.White[i].Special_Move !== "") {
                 ans.push(" " + "The " + i + " is: " + pieces.White[i].Special_Move + "  \n");
@@ -79,7 +88,7 @@ function bot_answer(question) {
             ans.push(openings["opening"][any_element(openings["opening"].length)]);
         }
     } else if (question === "A6") {
-        for (let i in questions["etiquette"]) {
+        for (let i of questions["etiquette"]) {
             ans.push(i);
         }
     } else if (question === "A99") {
@@ -143,6 +152,7 @@ async function searchFile(keywords, file = "Rule.txt") {
     }
     return ans
 } //search for keywords in Rule.txt. is line by line search
+
 function any_element(arr_len) {
     return Math.floor(Math.random() * arr_len);
 } //return random element in an array
@@ -171,22 +181,69 @@ function score(keyword, from_file) {
     return max
 } //ranks the results of the search based on how early keywords is found: earlier is better
 
-function grammar_handler(keywords, words) {//"can", "is", "does", "will", "should", "could", "would", "how", "why", "when", "what", "which", "will", "mean"
-    if (["when", "can", "could", "would"].some(val => words.includes(val))) {
-        keywords["rule_book"].push("the");
-        keywords["rule_book"].push("a");
-        keywords["rule_book"].push("when")
-        keywords["rule_book"].push("can");
-        keywords["size"] += 4;
-    }
-    if (["what", "does", "is"].some(val => words.includes(val))) {
-        keywords["rule_book"].push("the");
-        keywords["rule_book"].push("is")
-        keywords["rule_book"].push("are");
-        keywords["rule_book"].push("a");
-        keywords["size"] += 5;
-    }
-    return keywords;
-} //depending on connectors, adds more value to the, to be optimised "score(keyword, from_file)"
+// function grammar_handler(keywords, words) {//"can", "is", "does", "will", "should", "could", "would", "how", "why", "when", "what", "which", "will", "mean"
+//     if (["when", "can", "could", "would"].some(val => words.includes(val))) {
+//         keywords["rule_book"].push("the");
+//         keywords["rule_book"].push("a");
+//         keywords["rule_book"].push("when")
+//         keywords["rule_book"].push("can");
+//         keywords["size"] += 4;
+//     }
+//     if (["what", "does", "is"].some(val => words.includes(val))) {
+//         keywords["rule_book"].push("the");
+//         keywords["rule_book"].push("is")
+//         keywords["rule_book"].push("are");
+//         keywords["rule_book"].push("a");
+//         keywords["size"] += 5;
+//     }
+//     return keywords;
+// } //depending on connectors, adds more value to the, to be optimised "score(keyword, from_file)"
 
-module.exports = {answer, bot_answer, next_ans};
+function expert(sect, mode) {
+    // console.log(sect)
+    let t = expert_number;
+    let ans = ""
+    let s = 0
+
+    if (!mode) {
+        if (sect !== [] && expert_number > 0) {
+            s = score(sect, [questions["expert answers"][expert_number - 1].toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;~]/g, "")])
+            ans = (1 < s / sect.length) ? questions["encourage"][any_element(questions["encourage"].length)] :
+                questions["encourage"][any_element(questions["encourage"].length)];
+        }
+        expert_number++;
+        return ans + " " + (t < questions["expert mode"].length) ? questions["expert mode"][t]
+            : "I have reached my talk limit for today, Please reset the chat"
+
+    } else {
+        let maxA = 0;
+        let ansA = 0;
+        for (let j in questions["expert answers"]) {
+            let val = score(sect, [questions["expert answers"][j].toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;~]/g, "")])
+            if (maxA < val) {
+                ansA = j;
+                maxA = val;
+            }
+        }
+        let maxB = 0;
+        let ansB = 0;
+        for (let i in questions["expert mode"]) {
+            let val = score(sect, [questions["expert mode"][i].toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;~]/g, "")])
+            if (maxB < val) {
+                ansB = i;
+                maxB = val;
+            }
+        }
+        return (maxB >= maxA) ? questions["expert answers"][ansB] : questions["expert answers"][ansA];
+    }
+}
+
+function clear() {
+    more = 0;
+    limit = 0;
+    expert_number = 0
+    ans_buffer = []
+}
+
+module.exports = {answer, bot_answer, expert, next_ans, clear, score};
+

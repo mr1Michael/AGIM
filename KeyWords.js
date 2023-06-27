@@ -7,6 +7,7 @@ let rule_book = JSON.parse(key_terms);
 let Question_data = fs.readFileSync('./Questions.json');
 let questions = JSON.parse(Question_data);
 let first_go = true;
+let expert_mode = false;
 
 // GLOBALS ---------------------------------------------------------------------------------------------------
 let board_record = [];
@@ -14,7 +15,7 @@ let board_record = [];
 const grammar = ["can", "is", "does", "will", "should", "could", "would", "how", "why", "when", "what", "which", "will",
     "mean"]
 const instruction = ["record", "game", "review", "opening", "recording", "start", "old", "stop", "end", "begin",
-    "agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo"]
+    "agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo", "board", "setup"]
 const piece = ["king", "queen", "bishop", "knight", "castle", "pawn"];
 const piece_operator = ["move", "capture", "captured", "many", "start", "position", "place", "placed", "worth",
     "value", "direction", "put", "special", "points"];
@@ -27,12 +28,13 @@ async function conversation_handler(sentence = "") {
     let words = sentence.toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;~]/g, "").split(" ");
     let kw = find_keywords(words);
     // Bot questions and human answers and bot questions.---------------------------------
-    let bot = bot_response(words);
+    let bot = bot_response(words); // (expert_mode)? bot_response(kw["rule_book"].concat(kw["grammar"])):
     if (!(bot === "")) {
         return bot;
     }
     // Bot questions finished -------------------------------------------------------------
     // Human questions
+    first_go = false;
     if (recording && bot_is_move(words)) {
         return "move recorded"
     }//Check if it is a move and the move is recorded:------------------
@@ -44,7 +46,6 @@ async function conversation_handler(sentence = "") {
         return bot;
     }// Check if it is an instruction and act accordingly
     let find = response.answer(kw)
-
     return find
 } //handles all that chats and assigns them accordingly
 
@@ -116,6 +117,9 @@ function bot_instruction(instr) {
         if (["review", "game"].every(val => instr.includes(val))) {
             return board_record[1];
         }
+        if (["setup", "board"].some(val => instr.includes(val))) {
+            return response.bot_answer("A1")
+        }
     }
     if (["agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo"].some(val => instr.includes(val))) {
         return response.bot_answer("A99");
@@ -124,25 +128,34 @@ function bot_instruction(instr) {
 }//instructions, mainly for openings and or recording
 
 function bot_response(words) {
+    let yes = ["yes", "ja", "yup", "da", "yebo", "ok", "okay", "sure", "cool", "so"];
+    let no = ["no", "nope", "nein", "nada", "na", "ayewa"];
+
     if (words[0] === "") {
         return questions["probe"][any_element(questions["probe"].length)]
     } else if (words[0] === "_") {
-        bot_question = (bot_question + 1) % questions["yes_or_no"].length;
         bot_raise = true;
-        return questions["yes_or_no"][bot_question - 1]; //see what happens when this rolls over at length and this value becomes -1
+        if (questions["yes_or_no"].length >= bot_question + 1) {
+            bot_question = (bot_question + 1)
+            return questions["yes_or_no"][bot_question - 1];
+        } else {
+            // let expert_answer = expert_mode? words.slice(2): "";
+
+            return "since you breezed through that tutorial, I have some questions for you"//response.expert(expert_answer, false)
+        }
+
     } else if (words[0] === "luis") {
         return "$"
     }
     if (bot_raise) {
-        if (["yes", "ja", "yup", "da", "yebo"].some(val => words.includes(val))) {
-            bot_raise = false;
+        bot_raise = false;
+        if (yes.some(val => words.includes(val))) {
             return response.bot_answer("A" + bot_question)
-        } else if (["no", "nope", "nein", "nada", "na", "ayewa"].some(val => words.includes(val))) {
-            bot_raise = false;
-            return questions["enquire"][any_element(questions["enquire"].length)]
+        } else if (no.some(val => words.includes(val))) {
+            return questions["enquire"][any_element(questions["enquire"].length)] + " " + bot_response("_");
         }
     } else {
-        if (["yes", "ja", "yup", "da", "yebo", "ok", "okay", "sure", "cool", "so"].some(val => words.includes(val))) {
+        if (yes.some(val => words.includes(val))) {
             if (!first_go) {
                 return response.next_ans();
             } else {
@@ -153,7 +166,7 @@ function bot_response(words) {
                 return t + bot_response("_");
             }
         } else {
-            if (["no", "nope", "nein", "nada", "na", "ayewa"].some(val => words.includes(val))) {
+            if (no.some(val => words.includes(val))) {
                 return bot_response("_");
             }
         }
@@ -161,16 +174,22 @@ function bot_response(words) {
     return "";
 } //Automated responses to automated predefined questions
 
-
 function any_element(arr_len) {
     return Math.floor(Math.random() * arr_len);
 } //Chooses random element in anny array
 
 function repeater() {
     return questions["repetition"][any_element(questions["repetition"].length)]
-}
+} // complain if answer is repeated
 
-module.exports = {converstaion_handler: conversation_handler, repeater}
+function clear() {
+    expert_mode = false;
+    bot_question = 0;
+    board_record = [];
+    response.clear();
+} // clear everything on disconnect
+
+module.exports = {converstaion_handler: conversation_handler, repeater, clear}
 
 
 // -------------------------------------------------------------testing---------------------------------------

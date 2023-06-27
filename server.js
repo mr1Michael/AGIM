@@ -29,6 +29,8 @@ app.get('/', (req, res) => {
 
 io.on('connect', (socket) => {
     console.log('socket connected');
+    ans_buffer = [];
+    kws.clear();
     setTimeout(function () {
         socket.emit('serverMessage', 'My name is AGIM, I\'m here to help you learn how to play chess');
     }, 800);
