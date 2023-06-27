@@ -9,7 +9,7 @@ let Question_data = fs.readFileSync('./Questions.json');
 let questions = JSON.parse(Question_data);
 let more = 0;
 let limit = 0;
-let expert_number = 0
+let expert_number = 0;
 let ans_buffer = []
 
 async function answer(keywords) {
@@ -91,6 +91,8 @@ function bot_answer(question) {
         for (let i of questions["etiquette"]) {
             ans.push(i);
         }
+    } else if (question === "A7") {
+        ans.push("Let us see what you have learnt, my young apprentice");
     } else if (question === "A99") {
         ans.push(questions["agim"][any_element(questions["agim"].length)]);
     }
@@ -105,7 +107,7 @@ function next_ans() {
     more++;
     if (more === limit - 1) {
         return "Lastly: " + ans_buffer[more];
-    } else if (more < ans_buffer.length - 1) {
+    } else if (more <= ans_buffer.length - 1) {
         return ans_buffer[more] + "," + questions["more"][any_element(questions["more"].length)];
     } else return questions["change_subject"][any_element(questions["change_subject"].length)];
 } //Iterates through the answers already found.
@@ -208,12 +210,17 @@ function expert(sect, mode) {
     if (!mode) {
         if (sect !== [] && expert_number > 0) {
             s = score(sect, [questions["expert answers"][expert_number - 1].toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;~]/g, "")])
-            ans = (1 < s / sect.length) ? questions["encourage"][any_element(questions["encourage"].length)] :
-                questions["encourage"][any_element(questions["encourage"].length)];
+            let temp = (sect.length < 1) ? 0 : s / sect.length < 1.2
+            console.log(s / questions["expert answers"][expert_number - 1].length) //====================================================================================================================================remember me
+            ans = (temp > 0.5) ? questions["encourage"][any_element(questions["encourage"].length)] + " " + questions["expert answers"][expert_number - 1] :
+                questions["excitement"][any_element(questions["excitement"].length)] + " " + "Next";
+            if (temp < 0.05) {
+                return "";
+            }
         }
         expert_number++;
-        return ans + " " + (t < questions["expert mode"].length) ? questions["expert mode"][t]
-            : "I have reached my talk limit for today, Please reset the chat"
+        return (t < questions["expert mode"].length) ? ans + " " + questions["expert mode"][t]
+            : "I have reached my talk limit for today, Please reset the chat";
 
     } else {
         let maxA = 0;

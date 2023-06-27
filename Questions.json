@@ -8,7 +8,8 @@
     " Did you know some pieces have special abilities? I can tell you all about them? ",
     " Would you like some hints regarding the pieces? ",
     " would you like to know some random opening and its names? ",
-    " Chess etiquette is a set of unwritten rules that govern the behavior of chess players, would you like to know some?"
+    " Chess etiquette is a set of unwritten rules that govern the behavior of chess players, would you like to know some?",
+    " since you breezed through that tutorial, I have some questions for you. Plenty of questions. Can I test your knowledge?"
   ],
   "enquire": [
     "what would you like to learn next? ",
@@ -149,9 +150,9 @@
     " want more? ",
     " shall I proceed? ",
     " there is more yes?",
-    "continue?",
-    "press on?",
-    "keep going?"
+    " continue?",
+    " press on?",
+    " keep going?"
   ],
   "etiquette": [
     " Shaking hands with your opponent before and after each game",
@@ -234,7 +235,8 @@
     "Can you put your opponent’s king in stalemate with any piece in chess?",
     "Can you capture an opponent’s piece that is protected by another piece in chess?",
     "Can you put your opponent’s king in check with any piece in chess?",
-    "Can you put your opponent’s king in checkmate with any combination of pieces in chess?"
+    "Can you put your opponent’s king in checkmate with any combination of pieces in chess?",
+    "What is a chessboard"
   ],
   "expert answers": [
     "A pawn moves forward one square, but on its first move, it can move forward two squares. NO Pawns cannot move backward.",
@@ -306,6 +308,7 @@
     "Yes, you can put your opponent’s king in stalemate with any piece or combination of pieces in chess if they block all legal moves for your opponent without putting their king in check.",
     "Yes, you can capture an opponent’s piece that is protected by another piece in chess if doing so does not put your own king in check.",
     "Yes, you can put your opponent’s king in check with any piece in chess if it attacks your opponent’s king.",
-    "Yes, you can put your opponent’s king in checkmate with any combination of pieces in chess if they create an inescapable threat to capture your opponent’s king on their next turn. However, certain combinations may be more difficult or unlikely than others depending on the position of the pieces on the board. For example, it is possible but rare to checkmate with only two knights or only one bishop. It is also possible but difficult to checkmate with only one rook or queen against a lone king. Checkmating with two bishops or"
+    "Yes, you can put your opponent’s king in checkmate with any combination of pieces in chess if they create an inescapable threat to capture your opponent’s king on their next turn. However, certain combinations may be more difficult or unlikely than others depending on the position of the pieces on the board. For example, it is possible but rare to checkmate with only two knights or only one bishop. It is also possible but difficult to checkmate with only one rook or queen against a lone king. Checkmating with two bishops or",
+    "A chessboard is a checkered gameboard used for the game of chess, on which the chess pieces are placed. The chessboard is square in shape and has a grid of 8x8 squares, resulting in 64 squares of alternating colors. Each player starts with 16 pieces, which are placed on the two rows closest to the player. The chessboard is positioned so that the bottom-right square is white"
   ]
 }

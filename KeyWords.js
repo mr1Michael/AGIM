@@ -15,14 +15,15 @@ let board_record = [];
 const grammar = ["can", "is", "does", "will", "should", "could", "would", "how", "why", "when", "what", "which", "will",
     "mean"]
 const instruction = ["record", "game", "review", "opening", "recording", "start", "old", "stop", "end", "begin",
-    "agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo", "board", "setup"]
+    "agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo", "board", "setup", "question", "ask"]
 const piece = ["king", "queen", "bishop", "knight", "castle", "pawn"];
 const piece_operator = ["move", "capture", "captured", "many", "start", "position", "place", "placed", "worth",
     "value", "direction", "put", "special", "points"];
 
 let bot_question = 0;
 let bot_raise = false;
-let recording = false
+let recording = false;
+
 
 async function conversation_handler(sentence = "") {
     let words = sentence.toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;~]/g, "").split(" ");
@@ -32,6 +33,7 @@ async function conversation_handler(sentence = "") {
     if (!(bot === "")) {
         return bot;
     }
+
     // Bot questions finished -------------------------------------------------------------
     // Human questions
     first_go = false;
@@ -42,9 +44,17 @@ async function conversation_handler(sentence = "") {
         return questions["not_understanding"][any_element(questions["not_understanding"].length)];
     }// If keywords too few, ask repeat
     bot = bot_instruction(kw["instruction"]);
+    // if (expert_mode){
+    //     let temp = response.expert(kw["rule_book"].concat(kw["grammar"]), false);
+    //     if (temp !== ""){
+    //         return temp;
+    //     }
+    // }
     if (!(bot === "")) {
         return bot;
     }// Check if it is an instruction and act accordingly
+
+
     let find = response.answer(kw)
     return find
 } //handles all that chats and assigns them accordingly
@@ -120,6 +130,10 @@ function bot_instruction(instr) {
         if (["setup", "board"].some(val => instr.includes(val))) {
             return response.bot_answer("A1")
         }
+        if (["ask", "question"].some(val => instr.includes(val))) {
+            expert_mode = false;
+            return "Okay, you can Ask Yor question"
+        }
     }
     if (["agim", "hi", "hello", "ola", "hie", "bonjour", " greetings", "hallo"].some(val => instr.includes(val))) {
         return response.bot_answer("A99");
@@ -134,20 +148,20 @@ function bot_response(words) {
     if (words[0] === "") {
         return questions["probe"][any_element(questions["probe"].length)]
     } else if (words[0] === "_") {
+        first_go = false;
         bot_raise = true;
         if (questions["yes_or_no"].length >= bot_question + 1) {
-            bot_question = (bot_question + 1)
+            bot_question = (bot_question + 1);
             return questions["yes_or_no"][bot_question - 1];
-        } else {
-            // let expert_answer = expert_mode? words.slice(2): "";
-
-            return "since you breezed through that tutorial, I have some questions for you"//response.expert(expert_answer, false)
         }
-
+        // expert_mode = true;
+        return ""
     } else if (words[0] === "luis") {
+        first_go = false;
         return "$"
     }
     if (bot_raise) {
+        first_go = false;
         bot_raise = false;
         if (yes.some(val => words.includes(val))) {
             return response.bot_answer("A" + bot_question)
@@ -157,7 +171,11 @@ function bot_response(words) {
     } else {
         if (yes.some(val => words.includes(val))) {
             if (!first_go) {
-                return response.next_ans();
+                let t = response.next_ans();
+                // if (t===""){
+                //     expert_mode = true;
+                // }
+                return t;
             } else {
                 first_go = false;
                 let t = 'Chess is a strategy board game for two players, called White and Black,' +
