@@ -32,10 +32,11 @@ io.on('connect', (socket) => {
     ans_buffer = [];
     kws.clear();
     setTimeout(function () {
-        socket.emit('serverMessage', 'My name is AGIM, I\'m here to help you learn how to play chess');
+        socket.emit('serverMessage', 'My name is AGIM, I\'m here to help you learn how to play chess. I can ' +
+            'answer some questions and I can test your knowledge');
     }, 800);
     setTimeout(function () {
-        socket.emit('serverMessage', 'I can also record your games (not againt me), just ask me to ' +
+        socket.emit('serverMessage', 'I can also record your games (not against me), just ask me to ' +
             '"start recording" and "stop recording" to stop and "review game" to see your moves');
     }, 1200);
     setTimeout(function () {
@@ -63,7 +64,7 @@ io.on('connect', (socket) => {
                         socket.emit('serverMessage', "switching to LUIS")
                     } else {
                         if (ans_buffer.includes(result)) {
-                            socket.emit('serverMessage', kws.repeater())
+                            socket.emit('serverMessage', kws.repeater() + " " + result)
                         } else {
                             ans_buffer.push(result)
                             socket.emit('serverMessage', result);

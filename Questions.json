@@ -2,6 +2,10 @@
   "author": "Michael Mutote gmbh",
   "name": "Chatbot",
   "version": "1.0.5.2",
+  "help": [
+    "How can I help you today",
+    "What would you like to know"
+  ],
   "yes_or_no": [
     " Let us start from the beginning, do you want me to show you how to set up the board? ",
     " How about the pieces now, do you want to learn about how the pieces move? ",

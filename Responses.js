@@ -40,10 +40,17 @@ async function answer(keywords) {
     }
     if (keywords["rule_book"].length >= 1) {
         let search_ans = await searchFile([keywords["piece"], keywords["piece operator"], keywords["rule_book"]].flat());
-        let ex_ans = expert(keywords["rule_book"].concat(keywords["grammar"]), true)
+        let ex_ans = expert(keywords["rule_book"].concat(keywords["grammar"]), true);
+        let search_score = score(keywords["rule_book"].concat(keywords["grammar"]), [search_ans.join()]);
+        let ex_score = score(keywords["rule_book"].concat(keywords["grammar"]), [ex_ans]);
+        console.log(ex_score, ex_ans, "\n", search_ans, search_score)
+
         ans_buffer = [];
-        ans_buffer = ((score(keywords["rule_book"].concat(keywords["grammar"]), [search_ans.join()])) >
-            (score(keywords["rule_book"].concat(keywords["grammar"]), [ex_ans]))) ? search_ans : [ex_ans];
+        if (ex_score > 3 || search_score > 3) {
+            ans_buffer = (ex_score > search_score) ? [ex_ans] : search_ans;
+        } else {
+            ans_buffer = [questions["no_answer"][any_element(questions["no_answer"].length)]]
+        }
         limit = ans_buffer.length;
         return ans_buffer[more]
     }
