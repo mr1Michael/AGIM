@@ -13,7 +13,7 @@ each player controls 16 pieces of six types on a chessboard king, queen, bishop,
 each type of piece moves in a distinct way -
 a game can end in various ways, checkmate, resignation or a draw.
 
-capturing means taking a piece that is in a threatened position -
+capturing or to capture means taking a piece that is in a threatened position -
 Captures are indicated by an x between the piece being moved and its destination on record-
 a threatened piece is one that is at risk of being captured -
 a piece can be taken if it is at the end of path of an opponent's piece -

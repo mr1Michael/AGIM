@@ -7,7 +7,7 @@
     "What would you like to know"
   ],
   "yes_or_no": [
-    " Let us start from the beginning, do you want me to show you how to set up the board? ",
+    " Do you want me to show you how to set up the board? ",
     " How about the pieces now, do you want to learn about how the pieces move? ",
     " Did you know some pieces have special abilities? I can tell you all about them? ",
     " Would you like some hints regarding the pieces? ",
@@ -20,10 +20,12 @@
     "What can I show you? ",
     "ask me anything, anything at all, ",
     "I possess wisdom of the ancients. I want to share. Ask. ",
-    "Ask an you shall be wiser, Ask.",
+    "Ask and you shall be wiser, Ask.",
     "You have much to learn, my young padawan. Ask",
     "I cannot tell a lie, test me. ",
-    "Anything else"
+    "Anything else i can assist you with? ",
+    "I can show you more",
+    "there will be a quiz later! You can trigger it by saying \"start quiz\" "
   ],
   "excitement": [
     "yay",
@@ -147,12 +149,12 @@
     "huh"
   ],
   "more": [
-    " shall I continue? ",
+    " shall we continue? ",
     " do you require more information? ",
-    " shall I keep going? ",
+    " shall we keep going? ",
     " there is more, do you want it ",
     " want more? ",
-    " shall I proceed? ",
+    " shall we proceed? ",
     " there is more yes?",
     " continue?",
     " press on?",
@@ -185,11 +187,10 @@
     "Can you win a game of chess by capturing all of your opponent’s pieces except for their king?",
     "Can you put your opponent’s king in checkmate with only one piece?",
     "Can you put your opponent’s king in stalemate with only one piece?",
-    "Can you putyour opponent’s king in checkmate with only pawns?",
+    "Can you put your opponent’s king in checkmate with only pawns?",
     "Can you put your opponent’s king in stalemate with only pawns?",
     "Can you put your opponent’s king in checkmate with only knights?",
     "Can you put your opponent’s king in stalemate with only knights?",
-    "Can you put your opponent’s king in checkmate with only bishops?",
     "Can you put your opponent’s king in stalemate with only bishops?",
     "Can you put your opponent’s king in checkmate with only rooks?",
     "Can you put your opponent’s king in stalemate with only rooks?",
@@ -210,7 +211,7 @@
     "What happens if a player runs out of time in a timed game of chess?",
     "What is the touch-move rule in chess?",
     "Can you take back a move in chess?",
-    "What is the fifty-move rule in chess?",
+    "What is the fifty move rule in chess?",
     "What is the threefold repetition rule in chess?",
     "Can you offer a draw in chess? How do you accept or decline a draw offer in chess?",
     "Can you resign a game of chess? How do you indicate that you have resigned a game of chess?",

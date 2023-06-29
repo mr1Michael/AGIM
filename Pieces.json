@@ -10,7 +10,7 @@
         " cannot move into a threatened position"
       ],
       "points": " is worth INFINITY points",
-      "Alias": "",
+      "Alias": "king",
       "Recording": "K",
       "Quantity": 1,
       "Current_Position": [
@@ -29,7 +29,7 @@
         " normally the player's best defensive and offensive piece"
       ],
       "points": " is worth 9 points",
-      "Alias": "",
+      "Alias": "queen",
       "Recording": "Q",
       "Quantity": 1,
       "Current_Position": [
@@ -48,7 +48,7 @@
         "The bishops cannot \"jump\" over any pieces in its way"
       ],
       "points": " is worth 3 points",
-      "Alias": "",
+      "Alias": "bishop",
       "Recording": "B",
       "Quantity": 2,
       "Current_Position": [
@@ -130,7 +130,7 @@
         " cannot move into a threatened position"
       ],
       "points": " is worth INFINITY points",
-      "Alias": "",
+      "Alias": "king",
       "Recording": "K",
       "Quantity": 1,
       "Current_Position": [
@@ -149,7 +149,7 @@
         " normally the player's best defensive and offensive piece"
       ],
       "points": " is worth 9 points",
-      "Alias": "",
+      "Alias": "queen",
       "Recording": "Q",
       "Quantity": 1,
       "Current_Position": [
@@ -168,7 +168,7 @@
         "The bishops cannot \"jump\" over any pieces in its way"
       ],
       "points": " is worth 3 points",
-      "Alias": "",
+      "Alias": "bishop",
       "Recording": "B",
       "Quantity": 2,
       "Current_Position": [

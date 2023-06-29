@@ -40,7 +40,7 @@ io.on('connect', (socket) => {
             '"start recording" and "stop recording" to stop and "review game" to see your moves');
     }, 1200);
     setTimeout(function () {
-        socket.emit('serverMessage', 'would you like me to start with the basics?');
+        socket.emit('serverMessage', 'What would you like to do?');
     }, 1600);
 
     socket.on('clientMessage', (data) => {
@@ -71,6 +71,7 @@ io.on('connect', (socket) => {
                         }
                     }
                 });
+
             }
         }
 
@@ -101,7 +102,7 @@ async function Azure(data) {
     //             // Include any additional parameters required by LUIS
     //         },
     //         headers: {
-    //             'Authorization' : 'bearer dec1883a01874e5888457eeaf5a7af7d',
+    //             'Authorization' : 'bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     //             // Add any required headers for authentication or other purposes
     //         },
     //     });

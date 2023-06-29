@@ -2,74 +2,158 @@
 const fs = require("fs");
 const readline = require("readline");
 let raw_data = fs.readFileSync('./pieces.json');
-let pieces = JSON.parse(raw_data);
+let pieces = JSON.parse(raw_data);                              //main array of pieces data
 let opening_data = fs.readFileSync("./openings.json");
-let openings = JSON.parse(opening_data);
-let Question_data = fs.readFileSync('./Questions.json');
-let questions = JSON.parse(Question_data);
-let more = 0;
-let limit = 0;
-let expert_number = 0;
-let ans_buffer = []
+let openings = JSON.parse(opening_data);                        //array of stored openings
+let Question_data = fs.readFileSync('./Questions.json');  //ignore
+let questions = JSON.parse(Question_data);                      //array of stored questions
+let more = 0;           // continue on to next response in answer buffer
+let limit = 0;          // total Number of of answers in the asnwer buffer
+let quiz = false        // if true, it means that the bot asked the user a question/quizzed
+let expert_number = 0;  //means we are asking questions from the quiz and marking the answers
+let ans_buffer = [];    // where the next answers are stored
+let beginner = 0        // asking the yes no beginner questions
+let last_piece = null;
 
 async function answer(keywords) {
-    ans_buffer = [];
-    more = 0;
-    // console.log(keywords["size"])
-    if (keywords["piece"].length === 1) {
+    more++;
+    // if (more > Math.random()*20 && !quiz){
+    //     more = 0
+    //     return bot_answer("A7")
+    // }
+    if (quiz) {
+        // if (more > Math.random()*20 + 5){
+        //     quiz = false;
+        //     return "quiz has ended, nice try, looks like you have a lot to learn. What can I show you?"
+        // }
+        return expert(keywords["rule_book"].concat(keywords["grammar"]), false);
+    }
+    console.log(keywords["size"])
+    if (keywords["piece"].length === 1 && !quiz) {
+        limit = 0;
+        let t_info;  // temporarily storing data in here
         let t = keywords["piece"][0].charAt(0).toUpperCase() + keywords["piece"][0].slice(1); //Change piece name to upper case for navigate json
+        last_piece = t;
         if (keywords["piece operator"].includes("move")) {
-            return "The " + t + " " + pieces["White"][t]["steps"] + "and " + pieces["White"][t]["direction"];
+            t_info = "The " + t + " " + pieces["White"][t]["steps"] + "and " + pieces["White"][t]["direction"];
         } else if (keywords["piece operator"].includes("special")) {
-            return "The " + t + pieces["White"][t]["Special_Move"] + pieces["White"][t]["extended"];
+            t_info = "The " + t + pieces["White"][t]["Special_Move"] + pieces["White"][t]["extended"];
         } else if (keywords["piece operator"].includes("direction")) {
-            return "The " + t + pieces["White"][t]["direction"];
+            t_info = "The " + t + pieces["White"][t]["direction"];
         } else if (["steps"].some(val => keywords["piece operator"].includes(val))) {
-            return "The " + t + pieces["White"][t]["steps"];
+            t_info = "The " + t + pieces["White"][t]["steps"];
         } else if (["position", "placed", "place", "start", "put"].some(val => keywords["piece operator"].includes(val))) {
-            return "The " + t + "'s starting position is " + pieces["White"][t]["Current_Position"] + " for white";
+            t_info = "The " + t + "'s starting position is " + pieces["White"][t]["Current_Position"] + " for white";
         } else if (["worth", "value", "points"].some(val => keywords["piece operator"].includes(val))) {
-            return "The " + t + pieces["White"][t]["points"];
+            t_info = "The " + t + " is worth: " + pieces["White"][t]["points"];
         } else if (["capture", "take"].some(val => keywords["piece operator"].includes(val))) {
-            return "The " + t + pieces["White"][t]["capturing"];
+            t_info = "The " + t + pieces["White"][t]["capturing"];
         } else if (["many"].some(val => keywords["piece operator"].includes(val))) {
-            return pieces["White"][t]["Quantity"]
+            t_info = "There are: " + pieces["White"][t]["Quantity"] + " " + t;
+        } else if (["name"].some(val => keywords["piece operator"].includes(val))) {
+            t_info = "The " + t + " is also know as: " + pieces["White"][t]["Alias"];
         } else if (keywords["size"] === 2) {
-            return "Yes, the " + t + " is one of the pieces but, " + questions["not_understanding"][any_element(questions["not_understanding"].length)];
+            t_info = "Yes, the " + t + " is one of the pieces but, " + questions["not_understanding"][any_element(questions["not_understanding"].length)] + ".";
         }
+        return t_info + " " + "Can I tell you more about " + t
     }
-    if (keywords["rule_book"].length >= 1) {
-        let search_ans = await searchFile([keywords["piece"], keywords["piece operator"], keywords["rule_book"]].flat());
-        let ex_ans = expert(keywords["rule_book"].concat(keywords["grammar"]), true);
-        let search_score = score(keywords["rule_book"].concat(keywords["grammar"]), [search_ans.join()]);
-        let ex_score = score(keywords["rule_book"].concat(keywords["grammar"]), [ex_ans]);
-        console.log(ex_score, ex_ans, "\n", search_ans, search_score)
+    console.log(keywords["learning"], keywords["positive"], keywords["negative"])
+    if (["basic", "basics", "learn", "play"].some(val => keywords["learning"].includes(val))) {
+        // beginner = 1;
+        return bot_answer("A" + beginner);
+    }
+    if (['place', 'placed', 'setup', 'set'].some(val => keywords["learning"].includes(val))
+        && ["piece", "pieces", "board"].some(val => keywords["learning"].includes(val))) {
+        return bot_answer("A1")
+    }
+    if (['move', 'moves'].every(val => keywords["learning"].includes(val))
+        && ["piece", "pieces"].some(val => keywords["learning"].includes(val))) {
 
-        ans_buffer = [];
-        if (ex_score > 3 || search_score > 3) {
-            ans_buffer = (ex_score > search_score) ? [ex_ans] : search_ans;
-        } else {
-            ans_buffer = [questions["no_answer"][any_element(questions["no_answer"].length)]]
-        }
-        limit = ans_buffer.length;
-        return ans_buffer[more]
+        return bot_answer("A2")
     }
+    if (["yes"].some(val => keywords["positive"].includes(val))) {
+        if (ans_buffer.length !== 0) {
+            return next_ans()
+        }
+        if (last_piece !== null) {
+            return cycle();
+        }
+        return bot_answer("A6")
+    }
+    if (["no"].some(val => keywords["negative"].includes(val))) {
+        last_piece = null;
+        ans_buffer = [];
+        // return bot_answer("A2")
+    }
+    // if (more > Math.random()*20){
+    //     more = 0
+    //     return bot_answer("A7")
+    // }
+
+    try {
+        if (keywords["rule_book"].length >= 1) {
+            let search_ans = await searchFile([keywords["piece"], keywords["piece operator"], keywords["rule_book"]].flat());
+            let ex_ans = expert(keywords["rule_book"].concat(keywords["grammar"]), true);
+            let search_score = score(keywords["rule_book"].concat(keywords["grammar"]), [search_ans.join()]);
+            let ex_score = score(keywords["rule_book"].concat(keywords["grammar"]), [ex_ans]);
+            console.log(ex_score, ex_ans, "\n", search_ans, search_score)
+
+            ans_buffer = [];
+
+            if (ex_score > 3 || search_score > 3) {
+                ans_buffer = (ex_score > search_score) ? [ex_ans] : search_ans;
+            } else {
+                ans_buffer = [questions["no_answer"][any_element(questions["no_answer"].length)] + ". " +
+                questions["enquire"][any_element(questions["enquire"].length)]];
+            }
+            limit = ans_buffer.length;
+            return (ans_buffer.length > 1) ? ans_buffer.shift() + " Can I tell you more about this? " : ans_buffer.shift();
+        }
+    } catch (err) {
+        if (quiz) {
+            return null
+        }
+        quiz = true
+        return bot_answer("A7")
+    }
+
 
 } //called directly from Handler. First checks if keywords match Pieces.json and if not the searches Rule.txt
+
+function cycle() {
+    let t = last_piece;
+    last_piece = null;
+    return "The " + t + " " + pieces["White"][t]["steps"] + "and " + pieces["White"][t]["direction"] +
+        ". The " + t + pieces["White"][t]["Special_Move"] + pieces["White"][t]["extended"] +
+        ". The " + t + "'s starting position is " + pieces["White"][t]["Current_Position"] + " for white" +
+        ". The " + t + " " + pieces["White"][t]["points"] +
+        ". The " + t + pieces["White"][t]["capturing"] +
+        " There is: " + pieces["White"][t]["Quantity"] + " " + t +
+        ". The " + t + " is also know as: " + pieces["White"][t]["Alias"] + "\n\n\n. what else can I teach you?";
+}
+
 function bot_answer(question) {
     let ans = []
+    beginner++;
     ans[0] = "";
     let ans_start = "";//questions["positive_answer"][any_element(questions["positive_answer"].length)]
+    if (question === "A0") {
+        return 'Chess is a strategy board game for two players, called White and Black,' +
+            ' each controlling an army of chess pieces (16) in their color, with the objective to checkmate the' +
+            ' opponent\'s king. Is there anything in particular you want to start with? ';
+    }
     if (question === "A1") {
-        ans_start = ans_start + ". I'll do the white pieces and lets see if you can do the black pieces."
+        ans_start = ans_start + "I can show you how to setup the board. I'll do the white pieces and lets see if you can do the black pieces."
         for (let i in pieces.White) {
-            k = ""
+            let k = ""
             for (let j in pieces.White[i].Current_Position) {
                 k = k + " " + i + " " + pieces.White[i].Current_Position[j] + " ";
             }
             ans.push(k)
         }
+
     } else if (question === "A2") {
+        ans_start = "Each unique piece moves differently. Here's how"
         for (let i in pieces.White) {
             ans.push("The " + i + " " + pieces.White[i].steps + " ");
             for (let j in pieces.White[i].direction) {
@@ -95,27 +179,31 @@ function bot_answer(question) {
             ans.push(openings["opening"][any_element(openings["opening"].length)]);
         }
     } else if (question === "A6") {
+        ans_start = "here is some chess ettiquette for you, while you decide your fate: "
         for (let i of questions["etiquette"]) {
             ans.push(i);
         }
     } else if (question === "A7") {
-        ans.push("Let us see what you have learnt, my young apprentice");
+        quiz = true;
+        return "Now I shall quiz you. to stop the quiz, you can just type \"quit quiz\" Let us see what you have learnt, my young apprentice" +
+            expert([], false)
+    } else if (question === "A90") {
+        quiz = false;
+        ans.push("quiz is ended ");
     } else if (question === "A99") {
         ans.push(questions["agim"][any_element(questions["agim"].length)]);
     }
     ans[0] = ans_start;
     ans_buffer = [];
-    ans_buffer = ans;
+    ans_buffer = ans.slice(2);
     limit = ans.length;
-    more = 1;
-    return ans[0] + " " + ans[1] + " shall I continue? ";
+    return ans[0] + " " + ans[1] + " continue? ";
 } //bot answers to predetermined questions, needs to be expanded
 function next_ans() {
-    more++;
-    if (more === limit - 1) {
-        return "Lastly: " + ans_buffer[more];
-    } else if (more <= ans_buffer.length - 1) {
-        return ans_buffer[more] + "," + questions["more"][any_element(questions["more"].length)];
+    if (ans_buffer.length === 1) {
+        return "Lastly: " + ans_buffer.shift() + " " + questions["enquire"][any_element(questions["enquire"].length)]
+    } else if (1 < ans_buffer.length) {
+        return ans_buffer.shift() + "," + questions["more"][any_element(questions["more"].length)];
     } else return questions["change_subject"][any_element(questions["change_subject"].length)];
 } //Iterates through the answers already found.
 async function searchFile(keywords, file = "Rule.txt") {
@@ -178,6 +266,9 @@ function score(keyword, from_file) {
             let pos = s.indexOf(i)
             if (pos >= 0) {
                 if (pos <= half) {
+                    if (pos < half / 3) {
+                        val++;
+                    }
                     val++;
                 }
                 val++;
@@ -189,6 +280,10 @@ function score(keyword, from_file) {
     }
     return max
 } //ranks the results of the search based on how early keywords is found: earlier is better
+function check_placement() {
+
+}
+
 
 // function grammar_handler(keywords, words) {//"can", "is", "does", "will", "should", "could", "would", "how", "why", "when", "what", "which", "will", "mean"
 //     if (["when", "can", "could", "would"].some(val => words.includes(val))) {
@@ -213,16 +308,19 @@ function expert(sect, mode) {
     let t = expert_number;
     let ans = ""
     let s = 0
-
     if (!mode) {
-        if (sect !== [] && expert_number > 0) {
+        if (!(sect.length === 0) && expert_number > 0) {
+            if (sect.length === 1) {
+                return "explain"
+            }
             s = score(sect, [questions["expert answers"][expert_number - 1].toLowerCase().replace(/[!@#$%^&*()+=<>?:"{},./;~]/g, "")])
-            let temp = (sect.length < 1) ? 0 : s / sect.length < 1.2
-            console.log(s / questions["expert answers"][expert_number - 1].length) //====================================================================================================================================remember me
-            ans = (temp > 0.5) ? questions["encourage"][any_element(questions["encourage"].length)] + " " + questions["expert answers"][expert_number - 1] :
+            let temp = (sect.length < 1) ? 0 : s / sect.length;
+            console.log(temp) //====================================================================================================================================remember me
+            ans = (temp < 1) ? questions["encourage"][any_element(questions["encourage"].length)] + " " + questions["expert answers"][expert_number - 1] :
                 questions["excitement"][any_element(questions["excitement"].length)] + " " + "Next";
             if (temp < 0.05) {
-                return "";
+                quiz = false
+                return "looks like you are not even trying to be right. I'm ending the quiz. you can start again once you have learnt a bit more";
             }
         }
         expert_number++;
@@ -256,8 +354,11 @@ function clear() {
     more = 0;
     limit = 0;
     expert_number = 0
+    quiz = false;
+    beginner = 0;
     ans_buffer = []
 }
+
 
 module.exports = {answer, bot_answer, expert, next_ans, clear, score};
 
