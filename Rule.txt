@@ -129,9 +129,9 @@ You can do it by attacking the other player's forces in a way that allows you to
 Usually, the pinned piece blocks an attack to a more valuable piece, but it could also protect a key defender of the position or even impede a checkmate.
 
 A gambit is a chess opening in which a player sacrifices material with the aim of achieving a subsequent positional advantage -
-Queen's gambit (d4-d5-c4) White appears to sacrifice the c-pawn but  Black cannot retain the pawn without incurring a disadvantage -
-King's gambit (e4-e5-f4) White offers a pawn to divert the black e-pawn, if accepted, White may play d4 and Bxf4, regaining the gambit pawn with central domination, or direct their forces against the weak square f7 with moves such as Nf3, Bc4, 0-0, and g3 -
-A downside to the King's Gambit is that it weakens White's king's position, exposing it to the latent threat of ...Qh4+ (or ...Be7–h4+), which may force White to give up castling rights.
+Queen's gambit White appears to sacrifice the c-pawn but  Black cannot retain the pawn without incurring a disadvantage -
+King's gambit White offers a pawn to divert the black e-pawn, if accepted, White may play d4 and Bxf4, regaining the gambit pawn with central domination, or direct their forces against the weak square-
+A downside to the King's Gambit is that it weakens White's king's position, exposing it to the latent threat, which may force White to give up castling rights.
 
 Some common mistakes made by beginners in chess include moving their pieces without a plan or purpose -
 not developing their pieces properly at the start of the game -
