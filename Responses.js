@@ -66,7 +66,7 @@ async function answer(keywords) {
         && ["piece", "pieces", "board"].some(val => keywords["learning"].includes(val))) {
         return bot_answer("A1")
     }
-    if (['move', 'moves'].every(val => keywords["learning"].includes(val))
+    if (['move', 'moves'].some(val => keywords["learning"].includes(val))
         && ["piece", "pieces"].some(val => keywords["learning"].includes(val))) {
 
         return bot_answer("A2")
